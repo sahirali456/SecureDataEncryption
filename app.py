@@ -3,26 +3,21 @@ from encryption_system.crypto import CryptoHandler
 from data_manager.storage import DataManager
 from auth_system.security import AuthSystem
 
-# Initialize components
 crypto = CryptoHandler()
 data_manager = DataManager()
 auth = AuthSystem()
 
-# Session state setup
 if 'failed_attempts' not in st.session_state:
     st.session_state.failed_attempts = 0
 if 'locked' not in st.session_state:
     st.session_state.locked = False
 
-# UI Configuration
 st.set_page_config(page_title="Secure Data Vault", layout="wide")
 st.title("🔒 Military-Grade Data Encryption")
 
-# Navigation
 menu = ["Store Data", "Retrieve Data", "Admin Login"] if not st.session_state.locked else ["Admin Login"]
 choice = st.sidebar.selectbox("Menu", menu)
 
-# --- Store Data Section ---
 if choice == "Store Data":
     st.subheader("📥 Store Sensitive Data")
     
@@ -45,7 +40,6 @@ if choice == "Store Data":
             )
             st.success(f"✅ Data secured! Your Data ID: {data_id}")
 
-# --- Retrieve Data Section ---
 elif choice == "Retrieve Data":
     st.subheader("📤 Access Secured Data")
     
@@ -59,7 +53,6 @@ elif choice == "Retrieve Data":
             record = data_manager.get_record(data_id)
             
             if record:
-                # Debug output
                 st.write("### Debug Information")
                 st.write("Stored Hash:", record["passkey_hash"])
                 st.write("Computed Hash:", auth.hash_passkey(passkey))
@@ -81,7 +74,6 @@ elif choice == "Retrieve Data":
             else:
                 st.error("❌ Data ID not found")
 
-# --- Admin Login ---
 elif choice == "Admin Login":
     st.subheader("🛡️ Administrator Access")
     admin_pass = st.text_input("Enter master password:", type="password")
