@@ -41,7 +41,8 @@ if choice == "Store Data":
             data_manager.save_data(
                 data_id=data_id,
                 encrypted_text=encrypted,
-                passkey_hash=auth.hash_passkey(passkey)  
+                passkey_hash=auth.hash_passkey(passkey)
+            )
             st.success(f"✅ Data secured! Your Data ID: {data_id}")
 
 # --- Retrieve Data Section ---
@@ -58,6 +59,11 @@ elif choice == "Retrieve Data":
             record = data_manager.get_record(data_id)
             
             if record:
+                # Debug output
+                st.write("### Debug Information")
+                st.write("Stored Hash:", record["passkey_hash"])
+                st.write("Computed Hash:", auth.hash_passkey(passkey))
+                
                 if auth.validate_passkey(passkey, record["passkey_hash"]):
                     decrypted = crypto.decrypt(record["encrypted"])
                     st.session_state.failed_attempts = 0
@@ -74,10 +80,6 @@ elif choice == "Retrieve Data":
                         st.rerun()
             else:
                 st.error("❌ Data ID not found")
-# In Retrieve Data section (temporarily add these lines):
-st.write("Debug Info:")
-st.write("Stored Hash:", record["passkey_hash"])
-st.write("Input Hash:", auth.hash_passkey(passkey))
 
 # --- Admin Login ---
 elif choice == "Admin Login":
