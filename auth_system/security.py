@@ -3,8 +3,7 @@ import os
 import base64
 
 class AuthSystem:
-    # Enhanced fixed salt with higher security
-    SALT = base64.b64decode(b'c2VjdXJlX3NhbHRfMTIzNDU2Nzg5MA==')  # 16-byte salt
+    SALT = base64.b64decode(b'c2VjdXJlX3NhbHRfMTIzNDU2Nzg5MA==')  
     
     @staticmethod
     def hash_passkey(passkey: str) -> str:
@@ -22,7 +21,7 @@ class AuthSystem:
             'sha256',
             passkey.encode('utf-8'),
             AuthSystem.SALT,
-            210000  # Increased from 100k to 210k for better security
+            210000  
         ).hex()
     
     @staticmethod
@@ -37,7 +36,7 @@ class AuthSystem:
             
         try:
             input_hash = AuthSystem.hash_passkey(input_pass)
-            # Constant-time comparison
+            
             return len(input_hash) == len(stored_hash) and \
                    hashlib.sha256(input_hash.encode()).digest() == \
                    hashlib.sha256(stored_hash.encode()).digest()
