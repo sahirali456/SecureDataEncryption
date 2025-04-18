@@ -79,7 +79,7 @@ elif choice == "Admin Login":
     admin_pass = st.text_input("Enter master password:", type="password")
     
     if st.button("Unlock System"):
-        if admin_pass == "TopSecret123!":
+        if admin_pass == "SecureDataEncryption":
             st.session_state.locked = False
             st.session_state.failed_attempts = 0
             st.success("✅ System unlocked! Redirecting...")
