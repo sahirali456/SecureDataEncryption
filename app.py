@@ -36,13 +36,12 @@ if choice == "Store Data":
         elif passkey != confirm_passkey:
             st.error("Passphrases don't match!")
         else:
-            data_id = auth.hash_passkey(passkey)[:16]  # First 16 chars of hash as ID
+            data_id = auth.hash_passkey(passkey)[:16]
             encrypted = crypto.encrypt(user_data)
             data_manager.save_data(
                 data_id=data_id,
                 encrypted_text=encrypted,
-                passkey_hash=auth.hash_passkey(passkey)  # Added missing comma here
-            )
+                passkey_hash=auth.hash_passkey(passkey)  
             st.success(f"✅ Data secured! Your Data ID: {data_id}")
 
 # --- Retrieve Data Section ---
@@ -75,6 +74,10 @@ elif choice == "Retrieve Data":
                         st.rerun()
             else:
                 st.error("❌ Data ID not found")
+# In Retrieve Data section (temporarily add these lines):
+st.write("Debug Info:")
+st.write("Stored Hash:", record["passkey_hash"])
+st.write("Input Hash:", auth.hash_passkey(passkey))
 
 # --- Admin Login ---
 elif choice == "Admin Login":
