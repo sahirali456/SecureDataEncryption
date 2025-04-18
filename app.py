@@ -42,7 +42,7 @@ if choice == "Store Data":
                 data_id=data_id,
                 encrypted_text=encrypted,
                 passkey_hash=auth.hash_passkey(passkey)
-            st.success(f"✅ Data secured! Your Data ID: {data_id}")
+            st.success(f"✅ Data secured! Your Data ID: {data_id}"))
 # --- Retrieve Data Section ---
 elif choice == "Retrieve Data":
     st.subheader("📤 Access Secured Data")
