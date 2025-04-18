@@ -66,6 +66,6 @@ elif choice == "Admin Login":
             st.session_state.locked = False
             st.session_state.failed_attempts = 0
             st.success("System unlocked! Redirecting...")
-            st.experimental_rerun()
+            st.rerun()
         else:
             st.error("Invalid master password!")
