@@ -13,19 +13,19 @@ if 'locked' not in st.session_state:
     st.session_state.locked = False
 
 st.set_page_config(page_title="Secure Data Vault", layout="wide")
-st.title("🔒 Military-Grade Data Encryption")
+st.title("Military-Grade Data Encryption")
 
 menu = ["Store Data", "Retrieve Data", "Admin Login"] if not st.session_state.locked else ["Admin Login"]
 choice = st.sidebar.selectbox("Menu", menu)
 
 if choice == "Store Data":
-    st.subheader("📥 Store Sensitive Data")
+    st.subheader("Store Sensitive Data")
     
     user_data = st.text_area("Enter confidential data:", height=150)
     passkey = st.text_input("Create security passphrase:", type="password")
     confirm_passkey = st.text_input("Confirm passphrase:", type="password")
     
-    if st.button("🔐 Encrypt & Store"):
+    if st.button("Encrypt & Store"):
         if not user_data:
             st.error("Please enter data to encrypt")
         elif passkey != confirm_passkey:
@@ -41,12 +41,12 @@ if choice == "Store Data":
             st.success(f"✅ Data secured! Your Data ID: {data_id}")
 
 elif choice == "Retrieve Data":
-    st.subheader("📤 Access Secured Data")
+    st.subheader("Access Secured Data")
     
     data_id = st.text_input("Enter Data ID:").strip()
     passkey = st.text_input("Enter security passphrase:", type="password")
     
-    if st.button("🔓 Decrypt"):
+    if st.button("Decrypt"):
         if not data_id or not passkey:
             st.error("Both fields are required!")
         else:
@@ -69,16 +69,16 @@ elif choice == "Retrieve Data":
                     
                     if st.session_state.failed_attempts >= 3:
                         st.session_state.locked = True
-                        st.warning("🔒 System locked! Contact administrator")
+                        st.warning("System locked! Contact administrator")
                         st.rerun()
             else:
                 st.error("❌ Data ID not found")
 
 elif choice == "Admin Login":
-    st.subheader("🛡️ Administrator Access")
+    st.subheader("Administrator Access")
     admin_pass = st.text_input("Enter master password:", type="password")
     
-    if st.button("🔑 Unlock System"):
+    if st.button("Unlock System"):
         if admin_pass == "TopSecret123!":
             st.session_state.locked = False
             st.session_state.failed_attempts = 0
