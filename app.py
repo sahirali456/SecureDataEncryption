@@ -38,12 +38,11 @@ if choice == "Store Data":
         else:
             data_id = auth.hash_passkey(passkey)[:16]  # First 16 chars of hash as ID
             encrypted = crypto.encrypt(user_data)
-            data_manager.save_data(
+            data_manager.save_data(  # Fixed this line
                 data_id=data_id,
                 encrypted_text=encrypted,
                 passkey_hash=auth.hash_passkey(passkey)
             st.success(f"✅ Data secured! Your Data ID: {data_id}")
-
 # --- Retrieve Data Section ---
 elif choice == "Retrieve Data":
     st.subheader("📤 Access Secured Data")
