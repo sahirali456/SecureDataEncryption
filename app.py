@@ -55,7 +55,7 @@ elif choice == "Retrieve Data":
             if st.session_state.failed_attempts >= 3:
                 st.session_state.locked = True
                 st.warning("System locked! Contact administrator")
-                st.experimental_rerun()
+                st.rerun()
 
 elif choice == "Admin Login":
     st.subheader("Administrator Access")
